@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    style.
+      body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+      .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+      .header { background: #4f46e5; color: white; padding: 10px; text-align: center; }
+      .order-details { margin: 20px 0; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+      .footer { margin-top: 20px; font-size: 12px; color: #777; }
+  body
+    .container
+      .header
+        h1 Merci pour votre commande !
+      .order-details
+        p Bonjour #{user.name},
+        p Votre commande ##{order._id} a bien été reçue.
+        h3 Détails de la commande :
+        table
+          thead
+            tr
+              th Produit
+              th Quantité
+              th Prix
+          tbody
+            each item in order.orderItems
+              tr
+                td= item.name
+                td= item.quantity
+                td DT#{item.price.toFixed(2)}
+        p
+          strong Total: DT#{order.totalPrice.toFixed(2)}
+      .footer
+        p Cet email a été envoyé automatiquement. Veuillez ne pas y répondre.
