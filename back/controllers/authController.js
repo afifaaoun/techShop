@@ -29,7 +29,7 @@ exports.login = asyncHandler(async (req, res) => {
 
   // Mettre à jour la date de dernière connexion
   user.lastLogin = new Date();
-  await user.save();
+await user.save({ validateBeforeSave: false });
 
   // Créer token
   const token = jwt.sign({ id: user._id }, config.JWT_SECRET, {
@@ -273,7 +273,7 @@ exports.resetPassword = asyncHandler(async (req, res) => {
   user.password = req.body.password; 
   user.passwordResetToken = undefined;
   user.passwordResetExpires = undefined;
-  await user.save();
+await user.save({ validateBeforeSave: false });
 
   res.status(200).json({ success: true, message: 'Mot de passe mis à jour avec succès' });
 });
